@@ -106,7 +106,7 @@ touch setup.{py,cfg}
 
 参考: [setup using setup cfg files](https://setuptools.readthedocs.io/en/latest/setuptools.html#configuring-setup-using-setup-cfg-files)
 
-### ライブラリインストールチェック, pytestチェック
+### ライブラリインストールチェック, pytest チェック
 
 - Update `src/pkg/main.py`
 
@@ -125,9 +125,52 @@ pytest
 ============= test session starts =============
 platform darwin -- Python 3.6.8, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
 rootdir: /Users/tomowarkar/Desktop/github/pypkg
-collected 1 item                              
+collected 1 item
 
 tests/test_main.py .                    [100%]
 
 ============== 1 passed in 0.03s ==============
 ```
+
+### CircleCI の 設定
+
+- Update `.circleci/config.yml`
+
+CircleCI の設定をしようとしたら、以下のエラーでつまづいた。
+
+```bash
+$ circleci config validate
+Config file at .circleci/config.yml is valid.
+$ circleci local execute
+
+(中略)
+
+['Traceback (most recent call last):\n', '  File "/usr/local/lib/python3.6/site-packages/pipenv/utils.py", line 501, in create_spinner\n    yield sp\n', '  File "/usr/local/lib/python3.6/site-packages/pipenv/utils.py", line 649, in venv_resolve_deps\n    c = resolve(cmd, sp)\n', '  File "/usr/local/lib/python3.6/site-packages/pipenv/utils.py", line 539, in resolve\n    sys.exit(c.return_code)\n', 'SystemExit: 1\n']
+Error:
+Exited with code exit status 1
+
+Step failed
+Error: runner failed (exited with 101)
+Task failed
+Error: task failed
+```
+
+原因はどうやら `Pipfile.lock` 周りで起きているらしい。
+
+```bash
+$ pipenv update
+Running $ pipenv lock then $ pipenv sync.
+Locking [dev-packages] dependencies…
+✘ Locking Failed!
+
+(中略)
+
+There are incompatible versions in the resolved dependencies.
+```
+
+同様の案件は結構起きているらしいが、どうすれば解決できるかという点は結構あやふやな答えが多かった。
+
+ライブラリのバージョンにあたりをつけて手を動かしてみると `black = "==19.10b0"` とバージョンを固定してあげることで解決した。
+
+参考: [Pipenv でよく出喰わす問題](https://pipenv-ja.readthedocs.io/ja/translate-ja/diagnose.html)
+参考: [CircleCI のローカル CLI の使用](https://circleci.com/docs/ja/2.0/local-cli/)

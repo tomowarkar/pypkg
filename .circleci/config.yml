@@ -1,0 +1,39 @@
+version: 2.1
+
+commands:
+  style_check:
+    steps:
+      - run:
+          name: check package order
+          command: |
+            pipenv run isort -rc .
+      - run:
+          name: fix code style
+          command: |
+            pipenv run black .
+      - run:
+          name: check code style
+          command: |
+            pipenv run flake8 --show-source .
+
+  code_test:
+    steps:
+      - run:
+          name: run pytest
+          command: |
+            pipenv run pytest
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.8
+    steps:
+      - checkout
+      - run:
+          name: set up environment
+          command: |
+            sudo pip install pipenv
+            pipenv install -dev
+            pipenv install -e .
+      - style_check
+      - code_test
