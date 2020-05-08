@@ -1,0 +1,23 @@
+{
+  // リンター
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.mypyEnabled": true,
+  "python.linting.flake8Args": ["--max-line-length", "88"],
+  // フォーマッター
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black",
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  // pytest
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.nosetestsEnabled": false
+  //
+}
