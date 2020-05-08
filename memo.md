@@ -173,4 +173,15 @@ There are incompatible versions in the resolved dependencies.
 ライブラリのバージョンにあたりをつけて手を動かしてみると `black = "==19.10b0"` とバージョンを固定してあげることで解決した。
 
 参考: [Pipenv でよく出喰わす問題](https://pipenv-ja.readthedocs.io/ja/translate-ja/diagnose.html)
+
 参考: [CircleCI のローカル CLI の使用](https://circleci.com/docs/ja/2.0/local-cli/)
+
+### README.md のアップデート
+
+[shields](https://shields.io/)
+
+[A template to make good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+
+```bash
+curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32d87a2/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md
+```
