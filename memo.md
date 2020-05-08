@@ -185,3 +185,13 @@ There are incompatible versions in the resolved dependencies.
 ```bash
 curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32d87a2/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md
 ```
+
+### ドキュメントツール sphinx の導入
+
+- Update `docs/source/conf.py`
+
+```bash
+pipenv install --dev sphinx sphinx_rtd_theme
+sphinx-quickstart docs
+cd docs && make html && cd ..
+```
