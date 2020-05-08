@@ -9,6 +9,8 @@ black = "==19.10b0"
 isort = "*"
 mypy = "*"
 pytest = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
 
 [packages]
 pytest-cov = "*"
