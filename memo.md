@@ -105,3 +105,29 @@ touch setup.{py,cfg}
 参考: [Packaging a python library](https://blog.ionelmc.ro/2014/05/25/python-packaging/)
 
 参考: [setup using setup cfg files](https://setuptools.readthedocs.io/en/latest/setuptools.html#configuring-setup-using-setup-cfg-files)
+
+### ライブラリインストールチェック, pytestチェック
+
+- Update `src/pkg/main.py`
+
+```bash
+pip install -e .
+python
+>>> from pkg.main import hello
+>>> hello()
+'hello python'
+```
+
+- Update `tests/test_main.py`
+
+```bash
+pytest
+============= test session starts =============
+platform darwin -- Python 3.6.8, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /Users/tomowarkar/Desktop/github/pypkg
+collected 1 item                              
+
+tests/test_main.py .                    [100%]
+
+============== 1 passed in 0.03s ==============
+```
