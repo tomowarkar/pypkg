@@ -92,3 +92,16 @@ cat <<EOF >LICENSE
 ```bash
 curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore
 ```
+
+### ライブラリの作成
+
+```bash
+mkdir -p src/pkg tests
+touch src/pkg/{__init__,main}.py
+touch tests/{__init__,test_main}.py
+touch setup.{py,cfg}
+```
+
+参考: [Packaging a python library](https://blog.ionelmc.ro/2014/05/25/python-packaging/)
+
+参考: [setup using setup cfg files](https://setuptools.readthedocs.io/en/latest/setuptools.html#configuring-setup-using-setup-cfg-files)
