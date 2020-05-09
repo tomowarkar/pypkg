@@ -190,8 +190,16 @@ curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32
 
 - Update `docs/source/conf.py`
 
+- Update `docs/source/index.rst`
+
 ```bash
 pipenv install -dev sphinx sphinx_rtd_theme
 sphinx-quickstart docs
 cd docs && make html && cd ..
+
+# ./src/pkg 配下を参照して rst ファイルを ./docs/source に自動生成
+sphinx-apidoc -f -o ./docs/source ./src/pkg
+
+# ./docs/source を参照して rst -> html 変換, ./docs/build に出力
+sphinx-build -a ./docs/source ./docs/build
 ```
