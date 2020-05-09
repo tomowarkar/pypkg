@@ -11,9 +11,9 @@ mypy = "*"
 pytest = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
+pytest-cov = "*"
 
 [packages]
-pytest-cov = "*"
 
 [requires]
 python_version = "3.6"
