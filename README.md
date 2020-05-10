@@ -1,46 +1,54 @@
 # pypkg
 
-One Paragraph of project description goes here
+pythonプロジェクトのテンプレートを目指して作成したレポジトリ
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+cloneすることで手元でも同じように動かすことができます(たぶん(知らんけど))
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+#### 必須
 
-```
-Give examples
-```
+- [pipenv](https://github.com/pypa/pipenv)
+
+#### あると良い
+
+- [deirenv](https://github.com/direnv/direnv)
+- [circleci](https://circleci.com/docs/2.0/local-cli/)
+
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+#### レポジトリの継承
 
-Say what the step will be
-
+```bash
+git clone git@github.com:tomowarkar/pypkg.git pypkg
+cd pypkg
+git remote set-url origin git@github.com:username/repo.git
+git push origin master
 ```
-Give the example
+#### Prerequisitesの挿入
+
+```bash
+sudo pip install pipenv
+pipenv install -dev
 ```
 
-And repeat
+- you should update `docs/source/conf.py`
+- you should update `setup.cfg`
+- you should update `LICENSE`
 
-```
-until finished
-```
+if you need more detail
 
-End with an example of getting some data out of the system or using it for a little demo
+see [here](https://tomowarkar.github.io/pypkg/history)
+
 
 ## Usage
 
-https://tomowarkar.github.io/pypkg/build/index
+see [here](https://tomowarkar.github.io/pypkg/build/index)
 
-https://github.com/tomowarkar/pypkg/blob/master/docs/history.md
-
-```
-Give examples
-```
+[this is another option](https://github.com/tomowarkar/pypkg/tree/tools)
 
 ## Authors
 
