@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <!-- 全体 css -->
+        <link href="https://rawgithub.com/jasonm23/markdown-css-themes/gh-pages/markdown7.css" rel="stylesheet"></link>
+        <!-- highlight.js css-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs.min.css">
+        <style>
+            .hljs {
+                background: none;
+            }
+            .code-title {
+                display: inline-block;
+                padding: 2px 4px;
+                color:#333;
+                transform: translateY(-0.5em);
+                padding-bottom: 0;
+                font-weight: bold;
+                background-color: #999;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 id="汎用的な-python-プロジェクトのテンプレートを探る">汎用的な Python プロジェクトのテンプレートを探る</h2>
+<h3 id="pipenv-の導入">pipenv の導入</h3>
+<ul>
+<li><a href="https://github.com/pypa/pipenv">Homepage</a></li>
+</ul>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">pipenv install --python 3.6</code></pre>
+<p>参考: <a href="https://www.m3tech.blog/entry/python-packaging">Python のパッケージ周りのベストプラクティスを理解する</a></p>
+<h3 id="direnv-の導入">direnv の導入</h3>
+<ul>
+<li><a href="https://github.com/direnv/direnv">Homepage</a></li>
+<li><a href="https://github.com/tomowarkar/pypkg/blob/master/.envrc">.envrc</a></li>
+</ul>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">echo layout pipenv &gt;&gt; .envrc</code></pre>
+<p>参考: <a href="https://github.com/direnv/direnv/wiki/Python">direnv::wiki Python</a></p>
+<h3 id="開発者ツールリンター-フォーマッターの導入">開発者ツール(リンター, フォーマッター)の導入</h3>
+<ul>
+<li><a href="https://github.com/tomowarkar/pypkg/blob/master/Pipfile">Pipfile</a></li>
+</ul>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">pipenv install --dev flake8 black isort mypy pytest</code></pre>
+<h4 id="flake8">flake8</h4>
+<ul>
+<li><a href="https://gitlab.com/pycqa/flake8">Homepage</a></li>
+</ul>
+<p><a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a>準拠のコードチェックツール</p>
+<p>Usage: <code>pipenv run lint files ...</code></p>
+<h4 id="black">black</h4>
+<ul>
+<li><a href="https://github.com/psf/black">Homepage</a></li>
+</ul>
+<p><a href="https://www.python.org/dev/peps/pep-0008">PEP8</a>準拠の自動整形ツール</p>
+<p>Usage: <code>pipenv run format files ...</code></p>
+<h4 id="isort">isort</h4>
+<ul>
+<li><a href="https://github.com/timothycrosley/isort">Homepage</a></li>
+</ul>
+<p><a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a>に準拠した package の並び替えツール</p>
+<p>Usage: <code>isort files ...</code></p>
+<h4 id="mypy">mypy</h4>
+<ul>
+<li><a href="https://github.com/python/mypy">Homepage</a></li>
+</ul>
+<p>型ヒントの静的解析ツール <a href="https://www.python.org/dev/peps/pep-0484/">PEP484</a></p>
+<p>参考: <a href="https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html">チートシート</a></p>
+<h3 id="licence-gitignore-の作成">LICENCE, .gitignore の作成</h3>
+<ul>
+<li><a href="https://github.com/tomowarkar/pypkg/blob/master/LICENSE">LICENSE</a></li>
+<li><a href="https://github.com/tomowarkar/pypkg/blob/master/.gitignore">.gitignore</a></li>
+</ul>
+<p>参考: <a href="https://choosealicense.com/licenses/">Licenses</a></p>
+<p>参考:  <a href="https://github.com/github/gitignore">.gitignore</a></p>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">cat &lt;&lt;EOF &gt;LICENSE
+MIT License
+
+Copyright (c) [year] [fullname]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+EOF</code></pre>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore</code></pre>
+<h3 id="ライブラリの作成">ライブラリの作成</h3>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">mkdir -p src/pkg tests
+touch src/pkg/{__init__,main}.py
+touch tests/{__init__,test_main}.py
+touch setup.{py,cfg}</code></pre>
+<p>参考: <a href="https://blog.ionelmc.ro/2014/05/25/python-packaging/">Packaging a python library</a></p>
+<p>参考: <a href="https://setuptools.readthedocs.io/en/latest/setuptools.html#configuring-setup-using-setup-cfg-files">setup using setup cfg files</a></p>
+<h3 id="ライブラリインストールチェック-pytest-チェック">ライブラリインストールチェック, pytest チェック</h3>
+<ul>
+<li>Update <a href="https://github.com/tomowarkar/pypkg/blob/master/src/pkg/main.py"><code>src/pkg/main.py</code></a></li>
+</ul>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">pip install -e .
+python
+&gt;&gt;&gt; from pkg.main import hello
+&gt;&gt;&gt; hello()
+&#39;hello python&#39;</code></pre>
+<ul>
+<li>Update <a href="https://github.com/tomowarkar/pypkg/blob/master/tests/test_main.py"><code>tests/test_main.py</code></a></li>
+</ul>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">pytest
+============= test session starts =============
+platform darwin -- Python 3.6.8, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /Users/tomowarkar/Desktop/github/pypkg
+collected 1 item
+
+tests/test_main.py .                    [100%]
+
+============== 1 passed in 0.03s ==============</code></pre>
+<h3 id="circleci-の-設定">CircleCI の 設定</h3>
+<p>参考: <a href="https://circleci.com/docs/ja/2.0/local-cli/">CircleCI のローカル CLI の使用</a></p>
+<ul>
+<li>Update <a href="https://github.com/tomowarkar/pypkg/blob/master/.circleci/config.yml"><code>.circleci/config.yml</code></a></li>
+</ul>
+<p>CircleCI の設定をしようとしたら、以下のエラーでつまづいた。</p>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">$ circleci config validate
+Config file at .circleci/config.yml is valid.
+$ circleci local execute
+
+(中略)
+
+[&#39;Traceback (most recent call last):\n&#39;, &#39;  File &quot;/usr/local/lib/python3.6/site-packages/pipenv/utils.py&quot;, line 501, in create_spinner\n    yield sp\n&#39;, &#39;  File &quot;/usr/local/lib/python3.6/site-packages/pipenv/utils.py&quot;, line 649, in venv_resolve_deps\n    c = resolve(cmd, sp)\n&#39;, &#39;  File &quot;/usr/local/lib/python3.6/site-packages/pipenv/utils.py&quot;, line 539, in resolve\n    sys.exit(c.return_code)\n&#39;, &#39;SystemExit: 1\n&#39;]
+Error:
+Exited with code exit status 1
+
+Step failed
+Error: runner failed (exited with 101)
+Task failed
+Error: task failed</code></pre>
+<p>原因はどうやら <code>Pipfile.lock</code> 周りで起きているらしい。</p>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">$ pipenv update
+Running $ pipenv lock then $ pipenv sync.
+Locking [dev-packages] dependencies…
+✘ Locking Failed!
+
+(中略)
+
+There are incompatible versions in the resolved dependencies.</code></pre>
+<p>同様の案件は結構起きているらしいが、どうすれば解決できるかという点は結構あやふやな答えが多かった。</p>
+<p>ライブラリのバージョンにあたりをつけて手を動かしてみると <code>black = &quot;==19.10b0&quot;</code> とバージョンを固定してあげることで解決した。</p>
+<p>参考: <a href="https://pipenv-ja.readthedocs.io/ja/translate-ja/diagnose.html">Pipenv でよく出喰わす問題</a></p>
+<h3 id="readmemd-のアップデート">README.md のアップデート</h3>
+<p>参考: <a href="https://shields.io/">shields</a></p>
+<p>参考: <a href="https://gist.github.com/PurpleBooth/109311bb0361f32d87a2">A template to make good README.md</a></p>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32d87a2/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md</code></pre>
+<h3 id="ドキュメントツール-sphinx-の導入">ドキュメントツール sphinx の導入</h3>
+<p>参考: <a href="https://www.sphinx-doc.org/ja/master/">Sphinx::docs</a></p>
+<ul>
+<li><p>Update <a href="https://github.com/tomowarkar/pypkg/blob/master/docs/source/conf.py"><code>docs/source/conf.py</code></a></p>
+</li>
+<li><p>Update <a href="https://github.com/tomowarkar/pypkg/blob/master/docs/source/index.rst"><code>docs/source/index.rst</code></a></p>
+</li>
+</ul>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">pipenv install -dev sphinx sphinx_rtd_theme
+sphinx-quickstart docs
+cd docs &amp;&amp; make html &amp;&amp; cd ..
+
+# ./src/pkg 配下を参照して rst ファイルを ./docs/source に自動生成
+sphinx-apidoc -f -o ./docs/source ./src/pkg
+
+# ./docs/source を参照して rst -&gt; html 変換, ./docs/build に出力
+sphinx-build -a ./docs/source ./docs/build</code></pre>
+<h3 id="github-pages-への対応">github pages への対応</h3>
+<p>Settings (<a href="https://github.com/%7Buser%7D/%7Brepo%7D/settings">https://github.com/{user}/{repo}/settings</a>) &gt; GitHubページ &gt; Source &gt; <code>master branch /docs folder</code></p>
+<p>Github Pages は jekyll で処理され、jekyllは　sphinx に対応していないため　cssなど_(under bar)がつくファイルを参照しない.</p>
+<p>そのためGithubPagesのソースディレクトリ(今回は /docs) 配下に 空の .nojekyll を作成することで jekyll を 使わず処理することができ、sphinx の css などもうまく適応される。</p>
+<pre><div class="code-title">bash</div><code class="language-bash:bash">:&gt; docs/.nojekyll</code></pre>
+        <!-- highlight.js パーサー-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>
