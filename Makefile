@@ -9,5 +9,5 @@ diff:
 
 .PHONY: create
 create:
-	sphinx-apidoc -f -o ./docs/source ./src/pkg
+	sphinx-apidoc -f -o ./docs/source ./src
 	sphinx-build -a ./docs/source ./docs/build

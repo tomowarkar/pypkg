@@ -4,7 +4,7 @@
 
 - [Homepage](https://github.com/pypa/pipenv)
 
-```bash
+```bash:bash
 pipenv install --python 3.6
 ```
 
@@ -13,8 +13,9 @@ pipenv install --python 3.6
 ### direnv の導入
 
 - [Homepage](https://github.com/direnv/direnv)
+- [.envrc](../.envrc)
 
-```bash
+```bash:bash
 echo layout pipenv >> .envrc
 ```
 
@@ -22,7 +23,9 @@ echo layout pipenv >> .envrc
 
 ### 開発者ツール(リンター, フォーマッター)の導入
 
-```bash
+- [Pipfile](../Pipfile)
+
+```bash:bash
 pipenv install --dev flake8 black isort mypy pytest
 ```
 
@@ -56,46 +59,50 @@ Usage: `isort files ...`
 
 型ヒントの静的解析ツール [PEP484](https://www.python.org/dev/peps/pep-0484/)
 
-[チートシート](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)
+参考: [チートシート](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)
 
 ### LICENCE, .gitignore の作成
 
-- [Licenses](https://choosealicense.com/licenses/)
-- [.gitignore](https://github.com/github/gitignore)
+- [LICENSE](../LICENSE)
+- [.gitignore](../.gitignore)
 
-```bash
+参考: [Licenses](https://choosealicense.com/licenses/)
+
+参考:  [.gitignore](https://github.com/github/gitignore)
+
+```bash:bash
 cat <<EOF >LICENSE
-> MIT License
->
-> Copyright (c) [year] [fullname]
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-> of this software and associated documentation files (the "Software"), to deal
-> in the Software without restriction, including without limitation the rights
-> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-> copies of the Software, and to permit persons to whom the Software is
-> furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all
-> copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-> SOFTWARE.
-> EOF
+MIT License
+
+Copyright (c) [year] [fullname]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+EOF
 ```
 
-```bash
+```bash:bash
 curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore
 ```
 
 ### ライブラリの作成
 
-```bash
+```bash:bash
 mkdir -p src/pkg tests
 touch src/pkg/{__init__,main}.py
 touch tests/{__init__,test_main}.py
@@ -108,9 +115,9 @@ touch setup.{py,cfg}
 
 ### ライブラリインストールチェック, pytest チェック
 
-- Update `src/pkg/main.py`
+- Update [`src/pkg/main.py`](../src/pkg/main.py)
 
-```bash
+```bash:bash
 pip install -e .
 python
 >>> from pkg.main import hello
@@ -118,9 +125,9 @@ python
 'hello python'
 ```
 
-- Update `tests/test_main.py`
+- Update [`tests/test_main.py`](../tests/test_main.py)
 
-```bash
+```bash:bash
 pytest
 ============= test session starts =============
 platform darwin -- Python 3.6.8, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
@@ -134,11 +141,13 @@ tests/test_main.py .                    [100%]
 
 ### CircleCI の 設定
 
-- Update `.circleci/config.yml`
+参考: [CircleCI のローカル CLI の使用](https://circleci.com/docs/ja/2.0/local-cli/)
+
+- Update [`.circleci/config.yml`](../.circleci/config.yml)
 
 CircleCI の設定をしようとしたら、以下のエラーでつまづいた。
 
-```bash
+```bash:bash
 $ circleci config validate
 Config file at .circleci/config.yml is valid.
 $ circleci local execute
@@ -157,7 +166,7 @@ Error: task failed
 
 原因はどうやら `Pipfile.lock` 周りで起きているらしい。
 
-```bash
+```bash:bash
 $ pipenv update
 Running $ pipenv lock then $ pipenv sync.
 Locking [dev-packages] dependencies…
@@ -174,25 +183,26 @@ There are incompatible versions in the resolved dependencies.
 
 参考: [Pipenv でよく出喰わす問題](https://pipenv-ja.readthedocs.io/ja/translate-ja/diagnose.html)
 
-参考: [CircleCI のローカル CLI の使用](https://circleci.com/docs/ja/2.0/local-cli/)
 
 ### README.md のアップデート
 
-[shields](https://shields.io/)
+参考: [shields](https://shields.io/)
 
-[A template to make good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+参考: [A template to make good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
 
-```bash
+```bash:bash
 curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32d87a2/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md
 ```
 
 ### ドキュメントツール sphinx の導入
 
-- Update `docs/source/conf.py`
+参考: [Sphinx::docs](https://www.sphinx-doc.org/ja/master/)
 
-- Update `docs/source/index.rst`
+- Update [`docs/source/conf.py`](../docs/source/conf.py)
 
-```bash
+- Update [`docs/source/index.rst`](../docs/source/index.rst)
+
+```bash:bash
 pipenv install -dev sphinx sphinx_rtd_theme
 sphinx-quickstart docs
 cd docs && make html && cd ..
@@ -202,4 +212,15 @@ sphinx-apidoc -f -o ./docs/source ./src/pkg
 
 # ./docs/source を参照して rst -> html 変換, ./docs/build に出力
 sphinx-build -a ./docs/source ./docs/build
+```
+### github pages への対応
+
+Settings (https://github.com/{user}/{repo}/settings) > GitHubページ > Source > `master branch /docs folder`
+
+Github Pages は jekyll で処理され、jekyllは　sphinx に対応していないため　cssなど_(under bar)がつくファイルを参照しない.
+
+そのためGithubPagesのソースディレクトリ(今回は /docs) 配下に 空の .nojekyll を作成することで jekyll を 使わず処理することができ、sphinx の css などもうまく適応される。
+
+```bash:bash
+:> docs/.nojekyll
 ```
