@@ -4,7 +4,7 @@
 
 - [Homepage](https://github.com/pypa/pipenv)
 
-```bash
+```bash:bash
 pipenv install --python 3.6
 ```
 
@@ -15,7 +15,7 @@ pipenv install --python 3.6
 - [Homepage](https://github.com/direnv/direnv)
 - [.envrc](../.envrc)
 
-```bash
+```bash:bash
 echo layout pipenv >> .envrc
 ```
 
@@ -25,7 +25,7 @@ echo layout pipenv >> .envrc
 
 - [Pipfile](../Pipfile)
 
-```bash
+```bash:bash
 pipenv install --dev flake8 black isort mypy pytest
 ```
 
@@ -70,39 +70,39 @@ Usage: `isort files ...`
 
 参考:  [.gitignore](https://github.com/github/gitignore)
 
-```bash
+```bash:bash
 cat <<EOF >LICENSE
-> MIT License
->
-> Copyright (c) [year] [fullname]
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-> of this software and associated documentation files (the "Software"), to deal
-> in the Software without restriction, including without limitation the rights
-> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-> copies of the Software, and to permit persons to whom the Software is
-> furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all
-> copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-> SOFTWARE.
-> EOF
+MIT License
+
+Copyright (c) [year] [fullname]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+EOF
 ```
 
-```bash
+```bash:bash
 curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore
 ```
 
 ### ライブラリの作成
 
-```bash
+```bash:bash
 mkdir -p src/pkg tests
 touch src/pkg/{__init__,main}.py
 touch tests/{__init__,test_main}.py
@@ -117,7 +117,7 @@ touch setup.{py,cfg}
 
 - Update [`src/pkg/main.py`](../src/pkg/main.py)
 
-```bash
+```bash:bash
 pip install -e .
 python
 >>> from pkg.main import hello
@@ -127,7 +127,7 @@ python
 
 - Update [`tests/test_main.py`](../tests/test_main.py)
 
-```bash
+```bash:bash
 pytest
 ============= test session starts =============
 platform darwin -- Python 3.6.8, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
@@ -147,7 +147,7 @@ tests/test_main.py .                    [100%]
 
 CircleCI の設定をしようとしたら、以下のエラーでつまづいた。
 
-```bash
+```bash:bash
 $ circleci config validate
 Config file at .circleci/config.yml is valid.
 $ circleci local execute
@@ -166,7 +166,7 @@ Error: task failed
 
 原因はどうやら `Pipfile.lock` 周りで起きているらしい。
 
-```bash
+```bash:bash
 $ pipenv update
 Running $ pipenv lock then $ pipenv sync.
 Locking [dev-packages] dependencies…
@@ -190,7 +190,7 @@ There are incompatible versions in the resolved dependencies.
 
 参考: [A template to make good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
 
-```bash
+```bash:bash
 curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32d87a2/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md
 ```
 
@@ -202,7 +202,7 @@ curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32
 
 - Update [`docs/source/index.rst`](../docs/source/index.rst)
 
-```bash
+```bash:bash
 pipenv install -dev sphinx sphinx_rtd_theme
 sphinx-quickstart docs
 cd docs && make html && cd ..
@@ -221,6 +221,6 @@ Github Pages は jekyll で処理され、jekyllは　sphinx に対応してい�
 
 そのためGithubPagesのソースディレクトリ(今回は /docs) 配下に 空の .nojekyll を作成することで jekyll を 使わず処理することができ、sphinx の css などもうまく適応される。
 
-```bash
+```bash:bash
 :> docs/.nojekyll
 ```

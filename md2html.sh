@@ -25,10 +25,19 @@ md2html() {
             .hljs {
                 background: none;
             }
+            .code-title {
+                display: inline-block;
+                padding: 2px 4px;
+                color:#333;
+                transform: translateY(-0.5em);
+                padding-bottom: 0;
+                font-weight: bold;
+                background-color: #999;
+            }
         </style>
     </head>
     <body>
-        $(cat $1 | marked)
+        $(cat $1 | marked | sed 's/<code class="language-\([^:]*:\)\([^"]*\)">/<div class="code-title">\2<\/div><code class="language-\1\2">/g')
         <!-- highlight.js パーサー-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
