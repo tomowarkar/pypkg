@@ -13,6 +13,7 @@ pipenv install --python 3.6
 ### direnv の導入
 
 - [Homepage](https://github.com/direnv/direnv)
+- [.envrc](../.envrc)
 
 ```bash
 echo layout pipenv >> .envrc
@@ -21,6 +22,8 @@ echo layout pipenv >> .envrc
 参考: [direnv::wiki Python](https://github.com/direnv/direnv/wiki/Python)
 
 ### 開発者ツール(リンター, フォーマッター)の導入
+
+- [Pipfile](../Pipfile)
 
 ```bash
 pipenv install --dev flake8 black isort mypy pytest
@@ -56,12 +59,16 @@ Usage: `isort files ...`
 
 型ヒントの静的解析ツール [PEP484](https://www.python.org/dev/peps/pep-0484/)
 
-[チートシート](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)
+参考: [チートシート](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)
 
 ### LICENCE, .gitignore の作成
 
-- [Licenses](https://choosealicense.com/licenses/)
-- [.gitignore](https://github.com/github/gitignore)
+- [LICENSE](../LICENSE)
+- [.gitignore](../.gitignore)
+
+参考: [Licenses](https://choosealicense.com/licenses/)
+
+参考:  [.gitignore](https://github.com/github/gitignore)
 
 ```bash
 cat <<EOF >LICENSE
@@ -108,7 +115,7 @@ touch setup.{py,cfg}
 
 ### ライブラリインストールチェック, pytest チェック
 
-- Update `src/pkg/main.py`
+- Update [`src/pkg/main.py`](../src/pkg/main.py)
 
 ```bash
 pip install -e .
@@ -118,7 +125,7 @@ python
 'hello python'
 ```
 
-- Update `tests/test_main.py`
+- Update [`tests/test_main.py`](../tests/test_main.py)
 
 ```bash
 pytest
@@ -134,7 +141,9 @@ tests/test_main.py .                    [100%]
 
 ### CircleCI の 設定
 
-- Update `.circleci/config.yml`
+参考: [CircleCI のローカル CLI の使用](https://circleci.com/docs/ja/2.0/local-cli/)
+
+- Update [`.circleci/config.yml`](../.circleci/config.yml)
 
 CircleCI の設定をしようとしたら、以下のエラーでつまづいた。
 
@@ -174,13 +183,12 @@ There are incompatible versions in the resolved dependencies.
 
 参考: [Pipenv でよく出喰わす問題](https://pipenv-ja.readthedocs.io/ja/translate-ja/diagnose.html)
 
-参考: [CircleCI のローカル CLI の使用](https://circleci.com/docs/ja/2.0/local-cli/)
 
 ### README.md のアップデート
 
-[shields](https://shields.io/)
+参考: [shields](https://shields.io/)
 
-[A template to make good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+参考: [A template to make good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
 
 ```bash
 curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32d87a2/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md
@@ -188,9 +196,11 @@ curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32
 
 ### ドキュメントツール sphinx の導入
 
-- Update `docs/source/conf.py`
+参考: [Sphinx::docs](https://www.sphinx-doc.org/ja/master/)
 
-- Update `docs/source/index.rst`
+- Update [`docs/source/conf.py`](../docs/source/conf.py)
+
+- Update [`docs/source/index.rst`](../docs/source/index.rst)
 
 ```bash
 pipenv install -dev sphinx sphinx_rtd_theme
@@ -202,4 +212,15 @@ sphinx-apidoc -f -o ./docs/source ./src/pkg
 
 # ./docs/source を参照して rst -> html 変換, ./docs/build に出力
 sphinx-build -a ./docs/source ./docs/build
+```
+### github pages への対応
+
+Settings (https://github.com/{user}/{repo}/settings) > GitHubページ > Source > `master branch /docs folder`
+
+Github Pages は jekyll で処理され、jekyllは　sphinx に対応していないため　cssなど_(under bar)がつくファイルを参照しない.
+
+そのためGithubPagesのソースディレクトリ(今回は /docs) 配下に 空の .nojekyll を作成することで jekyll を 使わず処理することができ、sphinx の css などもうまく適応される。
+
+```bash
+:> docs/.nojekyll
 ```
