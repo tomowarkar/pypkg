@@ -1,53 +1,31 @@
-# pypkg
+# This is tools branch
 
-One Paragraph of project description goes here
+pypkgをより使いやすくするためのツール専用ブランチ
 
-## Getting Started
+## tools
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+### md2html
 
-### Prerequisites
+マークダウンパーサー
 
-What things you need to install the software and how to install them
+`.md`ファイルを`.html`ファイルに変換する
 
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
+```bash:bash
+$ sh md2html.sh input.md
 ```
 
-And repeat
+なおGithub Pagesを使用する場合内部リンクが崩壊する場合があるので別途修正が必要
 
-```
-until finished
-```
+以下は`docs/`配下のマークダウンファイルから相対参照でレポジトリ内のソースファイルをソースにしている場合の変更である
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Usage
-
-https://tomowarkar.github.io/pypkg/build/index
-
-https://github.com/tomowarkar/pypkg/blob/master/docs/history.md
-
-```
-Give examples
+```bash:bash
+$ sed -i.bak 's/<a href="\.\.\/\([^"]*\)/<a href="https:\/\/github.com\/{user name}\/{preo name}\/blob\/master\/\1/g' input.html
 ```
 
-## Authors
+### new
 
-[**tomowarkar**](https://github.com/tomowarkar)
+pythonのテストファイルとパッケージファイルを一緒に作る
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-## Acknowledgments
+```bash:bash
+$ sh new.sh hoge
+```
