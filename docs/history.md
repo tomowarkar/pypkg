@@ -68,7 +68,7 @@ Usage: `isort files ...`
 
 参考: [Licenses](https://choosealicense.com/licenses/)
 
-参考:  [.gitignore](https://github.com/github/gitignore)
+参考: [.gitignore](https://github.com/github/gitignore)
 
 ```bash:bash
 cat <<EOF >LICENSE
@@ -183,7 +183,6 @@ There are incompatible versions in the resolved dependencies.
 
 参考: [Pipenv でよく出喰わす問題](https://pipenv-ja.readthedocs.io/ja/translate-ja/diagnose.html)
 
-
 ### README.md のアップデート
 
 参考: [shields](https://shields.io/)
@@ -203,7 +202,7 @@ curl -o README.md https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32
 - Update [`docs/source/index.rst`](../docs/source/index.rst)
 
 ```bash:bash
-pipenv install -dev sphinx sphinx_rtd_theme
+pipenv install --dev sphinx sphinx_rtd_theme
 sphinx-quickstart docs
 cd docs && make html && cd ..
 
@@ -213,13 +212,14 @@ sphinx-apidoc -f -o ./docs/source ./src/pkg
 # ./docs/source を参照して rst -> html 変換, ./docs/build に出力
 sphinx-build -a ./docs/source ./docs/build
 ```
+
 ### github pages への対応
 
-Settings (https://github.com/{user}/{repo}/settings) > GitHubページ > Source > `master branch /docs folder`
+Settings (https://github.com/{user}/{repo}/settings) > GitHub ページ > Source > `master branch /docs folder`
 
-Github Pages は jekyll で処理され、jekyllは　sphinx に対応していないため　cssなど_(under bar)がつくファイルを参照しない.
+Github Pages は jekyll で処理され、jekyll は　 sphinx に対応していないため　 css など\_(under bar)がつくファイルを参照しない.
 
-そのためGithubPagesのソースディレクトリ(今回は /docs) 配下に 空の .nojekyll を作成することで jekyll を 使わず処理することができ、sphinx の css などもうまく適応される。
+そのため GithubPages のソースディレクトリ(今回は /docs) 配下に 空の .nojekyll を作成することで jekyll を 使わず処理することができ、sphinx の css などもうまく適応される。
 
 ```bash:bash
 :> docs/.nojekyll
